@@ -17,11 +17,12 @@ $settings = array(
     'consumer_secret' => CONSUMER_SECRET
 );
 
+
 /*
  * Get User's Tweets
  */
 $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-$getfield = '?screen_name=j7mbo';
+$getfield = '?screen_name=Marvel';
 $requestMethod = 'GET';
 $twitter = new TwitterAPIExchange($settings);
 $response = $twitter->setGetfield($getfield)
@@ -30,6 +31,14 @@ $response = $twitter->setGetfield($getfield)
 
 $decoded = json_decode($response);
 var_dump($decoded);
+$i=0;
+for($i;$i<5;$i++)
+{
+    $Tweet = $decoded[$i]->text;
+    $date = $decoded[$i]->created_at;
+    echo "$date $Tweet \n";
+}
+
 
 exit(0);
 
@@ -37,10 +46,13 @@ exit(0);
  * Get followers
  */
 $url = 'https://api.twitter.com/1.1/followers/ids.json';
-$getfield = '?screen_name=J7mbo';
+$getfield = '?screen_name=Marvel';
 $requestMethod = 'GET';
 
 $twitter = new TwitterAPIExchange($settings);
+
+
+
 echo $twitter->setGetfield($getfield)
     ->buildOauth($url, $requestMethod)
     ->performRequest();

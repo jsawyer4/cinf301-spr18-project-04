@@ -9,13 +9,16 @@
       case 'algorithms':
         $controller = new App\Controllers\AlgorithmsController();
       break;
+        case 'twitter':
+            $controller= new \App\Controllers\TwitterController();
     }
 
     $controller->{ $action }();
   }
 
   $controllers = array('main' => ['home', 'error'],
-                       'algorithms' => ['index', 'show']);
+                       'algorithms' => ['index', 'show'],
+                        'twitter' => ['index']);
 
   if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {

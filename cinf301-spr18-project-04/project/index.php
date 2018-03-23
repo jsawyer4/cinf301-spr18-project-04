@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
+
 if (isset($_GET['controller']) && isset($_GET['action'])) {
     $controller = $_GET['controller'];
     $action = $_GET['action'];
@@ -8,5 +9,6 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
     $controller = 'main';
     $action = 'home';
 }
+
 
 require_once ('views/layout.php');
