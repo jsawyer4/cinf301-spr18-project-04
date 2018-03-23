@@ -8,6 +8,8 @@ class TwitterController
     {
 
         $view = new Renderer('views/Twitter/');
+
         $view->render('twitter.php');
+
     }
 }
