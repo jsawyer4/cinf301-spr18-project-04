@@ -9,6 +9,9 @@ if (!isset($_SESSION["user"])) {
 if (isset($_GET['Account'])){
     $_SESSION["user"]= $_GET['Account'];
 }
+if (!isset($_SESSION["decode"])) {
+    $_SESSION["decode"]='NULL';
+}
 if (!isset($_SESSION["token"])) {
     $_SESSION["token"]= array(
         'oauth_access_token' => OAUTH_ACCESS_TOKEN,

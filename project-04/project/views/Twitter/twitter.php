@@ -1,18 +1,8 @@
 <?php
-$settings=$_SESSION['token'];
-$test=$_SESSION['user'];
-$getfield = '?screen_name='.$test;
-$requestMethod = 'GET';
-$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-$twitter = new TwitterAPIExchange($settings);
-$response = $twitter->setGetfield($getfield)
-    ->buildOauth($url, $requestMethod)
-    ->performRequest();
 
-$decoded = json_decode($response);
 
+$decoded=$_SESSION['decode'];
 $picture = $decoded[0]->user->profile_image_url;
-echo $picture
 
 ?>
 <!DOCTYPE html>
@@ -52,6 +42,8 @@ echo $picture
                 <div class="panel-heading">
                     <h3 class="panel-title">
 
+                      <p><a href="?controller=main&action=home">Home</a></p>
+
                     </h3>
                 </div>
 
@@ -59,7 +51,22 @@ echo $picture
             </div>
         </div>
         <div class="col-sm-6">
-
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="media">
+                        <a class="media-left" href="#fake">
+                            <img alt="" class="media-object img-rounded" src="<?php echo $picture; ?>">
+                        </a>
+                        <div class="media-body">
+                            <div class="form-group has-feedback">
+                                <label class="control-label sr-only" for="inputSuccess5">Hidden label</label>
+                                <input type="text" class="form-control" id="search2" aria-describedby="search">
+                                <span class="glyphicon glyphicon-camera form-control-feedback" aria-hidden="true"></span>
+                                <span id="search2" class="sr-only">(success)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="panel-body">
                     <div class="media">
                         <a class="media-left" href="#fake">
@@ -143,101 +150,10 @@ echo $picture
 
                 </div>
             </div>
-
-            <br>
-            <br>
-            <br>
-
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Prova</div>
-                <div class="panel-body">
-                    <ul class="nav nav-pills">
-                        <li role="presentation" class="active"><a href="#">Home</a></li>
-                        <li role="presentation"><a href="#">Profile</a></li>
-                        <li role="presentation"><a href="#">Messages</a></li>
-                    </ul>
-                </div>
-            </div>
         </div>
 
-        <div class="col-sm-3">
-            <div class="panel panel-default panel-custom">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Who to follow
-                        <small><a href="#">Refresh</a> ● <a href="#">View all</a></small>
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <div class="media">
-                        <div class="media-left">
-                            <img src="http://placehold.it/32x32" alt="" class="media-object img-rounded">
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">Nome e cognome</h4>
-                            <a href="#" class="btn btn-default btn-xs">
-                                +
-                                <span class="glyphicon glyphicon-user"></span>
-                                Follow
-                            </a>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="media-left">
-                            <img src="http://placehold.it/32x32" alt="" class="media-object img-rounded">
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">Nome e cognome</h4>
-                            <a href="#" class="btn btn-default btn-xs">
-                                +
-                                <span class="glyphicon glyphicon-user"></span>
-                                Follow
-                            </a>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="media-left">
-                            <img src="http://placehold.it/32x32" alt="" class="media-object img-rounded">
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">Nome e cognome</h4>
-                            <a href="#" class="btn btn-default btn-xs">
-                                +
-                                <span class="glyphicon glyphicon-user"></span>
-                                Follow
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-footer">
-                    <a href="www.google.it">
-                        <span class="glyphicon glyphicon-user"></span>
-                        Find people you know
-                    </a>
-                </div>
-            </div>
-            <div class="well well-sm">
-                <ul class="list-inline">
-                    <li>© 2015 Twitter</li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Help</a></li>
-                    <li><a href="#">Terms</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Cookies</a></li>
-                    <li><a href="#">Ads info</a></li>
-                    <li><a href="#">Brand</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Status</a></li>
-                    <li><a href="#">Apps</a></li>
-                    <li><a href="#">Jobs</a></li>
-                    <li><a href="#">Advertise</a></li>
-                    <li><a href="#">Businesses</a></li>
-                    <li><a href="#">Media</a></li>
-                    <li><a href="#">Developers</a></li>
-                </ul>
-            </div>
-        </div>
+
+
     </div>
 </div>
 

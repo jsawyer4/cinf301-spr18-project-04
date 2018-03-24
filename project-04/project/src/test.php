@@ -17,7 +17,7 @@ $settings = array(
     'consumer_secret' => CONSUMER_SECRET
 );
 
-$test='Marvel';
+$test='Marvelisgayaf';
 /*
  * Get User's Tweets
  */
@@ -33,16 +33,10 @@ $decoded = json_decode($response);
 $followers=
 var_dump($decoded);
 
-$i=0;
-for($i;$i<5;$i++)
-{
-    $Tweet = $decoded[$i]->user->name;
-    $date = $decoded[$i]->created_at;
-    echo "$date $Tweet \n";
-}
 
 
-exit(0);
+
+
 
 /*
  * Get followers
@@ -60,4 +54,3 @@ echo $twitter->setGetfield($getfield)
     ->performRequest();
 
 ?>
-twitter

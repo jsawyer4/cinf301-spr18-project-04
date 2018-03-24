@@ -1,28 +1,32 @@
 <?php
-  
-  function route($controller, $action) {
+
+/**
+ * @param $controller
+ * @param $action
+ */
+function route($controller, $action) {
     
     switch($controller) {
       case 'main':
-        $controller = new App\Controllers\MainController();
+        $controller = new \App\Controllers\MainController();
       break;
       case 'algorithms':
-        $controller = new App\Controllers\AlgorithmsController();
+        $controller = new \App\Controllers\AlgorithmsController();
       break;
         case 'twitter':
             $controller= new \App\Controllers\TwitterController();
             break;
         case 'User':
             $controller= new \App\Controllers\UserController();
+            break;
     }
-
     $controller->{ $action }();
   }
 
   $controllers = array('main' => ['home', 'error'],
                        'algorithms' => ['index', 'show'],
                         'twitter' => ['index','view'],
-                        'User' => ['index','error']);
+                            'User'=>['index,error']);
 
   if (array_key_exists($controller, $controllers)) {
     if (in_array($action, $controllers[$controller])) {
