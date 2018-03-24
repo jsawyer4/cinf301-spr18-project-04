@@ -4,11 +4,12 @@ use App\Renderer as Renderer;
 
 class TwitterController
 {
-    public function index()
+
+
+    public function view()
     {
 
         $view = new Renderer('views/Twitter/');
-
         $view->render('twitter.php');
 
     }

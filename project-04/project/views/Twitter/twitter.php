@@ -1,65 +1,47 @@
 <?php
+$settings=$_SESSION['token'];
+$test=$_SESSION['user'];
+$getfield = '?screen_name='.$test;
+$requestMethod = 'GET';
+$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+$twitter = new TwitterAPIExchange($settings);
+$response = $twitter->setGetfield($getfield)
+    ->buildOauth($url, $requestMethod)
+    ->performRequest();
 
+$decoded = json_decode($response);
+
+$picture = $decoded[0]->user->profile_image_url;
+echo $picture
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="cinf301-spr18-project-04">
-</head>
+<html>
 
-<body>
-<div class="navbar navbar-default navbar-static-top">
-    <div class="container">
-        <div class="navbar-collapse navbar-collapse-1 collapse" aria-expanded="true">
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="#fake"><span class="glyphicon glyphicon-home"></span> Home</a>
-                </li>
-                <li>
-                    <a href="#fake"><span class="glyphicon glyphicon-bell"></span> Notifications</a>
-                </li>
-                <li>
-                    <a href="#fake"><span class="glyphicon glyphicon-envelope"></span> Messages</a>
-                </li>
-            </ul>
-            <div class="navbar-form navbar-right">
-                <div class="form-group has-feedback">
-                    <input type="text" class="form-control-nav" id="search" aria-describedby="search1">
-                    <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
-                </div>
-
-                <button class="btn btn-primary" type="submit" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"> </span> Tweet
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="container">
     <div class="row">
         <div class="col-sm-3">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <a href="#"><img class="img-responsive" alt="" src="http://placehold.it/800x500"></a>
+                    <a href="#"><img class="img-responsive" alt="" src="<?php echo $picture; ?>"</a>
                     <div class="row">
                         <div class="col-xs-3">
                             <h5>
-                                <small>TWEETS</small>
-                                <a href="#">1,545</a>
+                                <small>LISTED</small>
+                                <?php $listed = $decoded[0]->user->listed_count; echo $listed ?>
                             </h5>
                         </div>
                         <div class="col-xs-4">
                             <h5>
-                                <small>FOLLOWING</small>
-                                <a href="#">251</a>
+                                <small>FRIENDS</small>
+                                <?php $friends = $decoded[0]->user->friends_count; echo $friends?>
                             </h5>
                         </div>
                         <div class="col-xs-5">
                             <h5>
                                 <small>FOLLOWERS</small>
-                                <a href="#">153</a>
+                                <?php $followers = $decoded[0]->user->followers_count; echo $followers ?>
                             </h5>
                         </div>
                     </div>
@@ -69,49 +51,23 @@
             <div class="panel panel-default panel-custom">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Trends
-                        <small><a href="#">ciao</a></small>
+
                     </h3>
                 </div>
 
-                <div class="panel-body">
-                    <ul class="list-unstyled">
-                        <li><a href="#">#Cras justo odio</a></li>
-                        <li><a href="#">#Dapibus ac facilisis in</a></li>
-                        <li><a href="#">#Morbi leo risus</a></li>
-                        <li><a href="#">#Porta ac consectetur ac</a></li>
-                        <li><a href="#">#Vestibulum at eros</a></li>
-                        <li><a href="#">#Vestibulum at eros</a></li>
-                        <li><a href="#">#Vestibulum at eros</a></li>
-                    </ul>
-                </div>
+
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <div class="media">
-                        <a class="media-left" href="#fake">
-                            <img alt="" class="media-object img-rounded" src="http://placehold.it/35x35">
-                        </a>
-                        <div class="media-body">
-                            <div class="form-group has-feedback">
-                                <label class="control-label sr-only" for="inputSuccess5">Hidden label</label>
-                                <input type="text" class="form-control" id="search2" aria-describedby="search">
-                                <span class="glyphicon glyphicon-camera form-control-feedback" aria-hidden="true"></span>
-                                <span id="search2" class="sr-only">(success)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="panel-body">
                     <div class="media">
                         <a class="media-left" href="#fake">
-                            <img alt="" class="media-object img-rounded" src="http://placehold.it/64x64">
+                            <img alt="" class="media-object img-rounded" src="<?php echo $picture; ?>">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading">Media heading</h4>
-                            <p>Dolorem aspernatur rerum, iure? Culpa iste aperiam sequi, fuga, quasi rerum, eum, quo natus tenetur officia placeat.</p>
+                            <h4 class="media-heading"><?php $name = $decoded[0]->user->name; echo $name ?></h4>
+                            <p><?php $text= $decoded[0]->text; echo $text ?></p>
                             <ul class="nav nav-pills nav-pills-custom">
                                 <li><a href="#"><span class="glyphicon glyphicon-share-alt"></span></a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-retweet"></span></a></li>
@@ -123,11 +79,11 @@
 
                     <div class="media">
                         <a class="media-left" href="#fake">
-                            <img alt="" class="media-object img-rounded" src="http://placehold.it/64x64">
+                            <img alt="" class="media-object img-rounded" src="<?php echo $picture; ?>">
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading">Media heading</h4>
-                            <p>Dolorem aspernatur rerum, iure? Culpa iste aperiam sequi, fuga, quasi rerum, eum, quo natus tenetur officia placeat.</p>
+                            <p><?php $text= $decoded[1]->text; echo $text ?></p>
                             <ul class="nav nav-pills nav-pills-custom">
                                 <li><a href="#"><span class="glyphicon glyphicon-share-alt"></span></a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-retweet"></span></a></li>
@@ -139,11 +95,11 @@
                     </div>
                     <div class="media">
                         <a class="media-left" href="#fake">
-                            <img alt="" class="media-object img-rounded" src="http://placehold.it/64x64">
+                            <img alt="" class="media-object img-rounded" src="<?php echo $picture; ?>">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading">Media heading</h4>
-                            <p>Dolorem aspernatur rerum, iure? Culpa iste aperiam sequi, fuga, quasi rerum, eum, quo natus tenetur officia placeat.</p>
+                            <h4 class="media-heading"><?php $name = $decoded[0]->user->name; echo $name ?></h4>
+                            <p><?php $text= $decoded[2]->text; echo $text ?></p>
                             <ul class="nav nav-pills nav-pills-custom">
                                 <li><a href="#"><span class="glyphicon glyphicon-share-alt"></span></a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-retweet"></span></a></li>
@@ -155,11 +111,11 @@
                     </div>
                     <div class="media">
                         <a class="media-left" href="#fake">
-                            <img alt="" class="media-object img-rounded" src="http://placehold.it/64x64">
+                            <img alt="" class="media-object img-rounded" src="<?php echo $picture; ?>">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading">Media heading</h4>
-                            <p>Dolorem aspernatur rerum, iure? Culpa iste aperiam sequi, fuga, quasi rerum, eum, quo natus tenetur officia placeat.</p>
+                            <h4 class="media-heading"><?php $name = $decoded[0]->user->name; echo $name ?></h4>
+                            <p><?php $text= $decoded[3]->text; echo $text ?></p>
                             <ul class="nav nav-pills nav-pills-custom">
                                 <li><a href="#"><span class="glyphicon glyphicon-share-alt"></span></a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-retweet"></span></a></li>
@@ -171,11 +127,11 @@
                     </div>
                     <div class="media">
                         <a class="media-left" href="#fake">
-                            <img alt="" class="media-object img-rounded" src="http://placehold.it/64x64">
+                            <img alt="" class="media-object img-rounded" src="<?php echo $picture; ?>">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading">Media heading</h4>
-                            <p>Dolorem aspernatur rerum, iure? Culpa iste aperiam sequi, fuga, quasi rerum, eum, quo natus tenetur officia placeat.</p>
+                            <h4 class="media-heading"><?php $name = $decoded[0]->user->name; echo $name ?></h4>
+                            <p><?php $text= $decoded[4]->text; echo $text ?></p>
                             <ul class="nav nav-pills nav-pills-custom">
                                 <li><a href="#"><span class="glyphicon glyphicon-share-alt"></span></a></li>
                                 <li><a href="#"><span class="glyphicon glyphicon-retweet"></span></a></li>
@@ -284,5 +240,9 @@
         </div>
     </div>
 </div>
-</body>
+
+
 </html>
+
+
+

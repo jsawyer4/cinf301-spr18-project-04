@@ -9,14 +9,12 @@ use App\Renderer as Renderer;
  * @author dplante
  *
  */
+
 class MainController
 {
     public function home()
     {
-        $title = 'Sorting Extravaganza!';
-        echo "true2";
         $view = new Renderer('views/main/');
-        $view->title = $title;
         $view->render('home.php');
     }
 
@@ -25,9 +23,5 @@ class MainController
         $view = new Renderer('views/main/');
         $view->render('error.php');
     }
-    public function twitter()
-    {
-        $view = new Renderer('views/Twitter/');
-        $view->render('twitter.php');
-    }
+
 }
